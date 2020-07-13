@@ -49,7 +49,6 @@
 						</div>
 					</div>
 				</div>
-				<br>
 			<?php endforeach; ?>
 			</div>
 	</section>
