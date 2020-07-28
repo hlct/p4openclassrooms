@@ -38,12 +38,16 @@ class AdminController{
 
 		$create = new AdminManager();
 
+		$_POST['username'] = htmlspecialchars($_POST['username']);
 		
+		$_POST['password'] = htmlspecialchars($_POST['password']);
+
 		if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])){
 
-		$users = $create -> displayLogin();
+			$users = $create -> displayLogin();
 
 		}
+		
 		if(isset($_POST['password'])){
 
 			/*Si le mot passe correspond au mot de passe haché alors connecte le user*/
@@ -55,9 +59,13 @@ class AdminController{
 
 				header('Location: index.php?action=displayadmin');
 
+				exit();
+
 			}else{
 
 				$_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
+
+				header('Location: index.php?action=displaylogin');
 
 			}	
 		}
@@ -76,26 +84,28 @@ class AdminController{
 
 
 	function admin(){
+
 		
-		$create = new AdminManager();
-		$admin = $create -> displayAdmin();
-		$homechapters = $create -> displayChap();
-		$displaychaps = $create -> displayChapAdmin();
-		$displayarticles = $create -> displayChap();
-		$displaycommentaires = $create -> displayCommentsAdmin();
-		$flags = $create -> displayFlag();
-		require('views/BackEnd/Adminview.php');
-
-
-
+			$create = new AdminManager();
+			$admin = $create -> displayAdmin();
+			$homechapters = $create -> displayChap();
+			$displaychaps = $create -> displayChapAdmin();
+			$displayarticles = $create -> displayChap();
+			$displaycommentaires = $create -> displayCommentsAdmin();
+			$flags = $create -> displayFlag();
+			require('views/BackEnd/Adminview.php');		
+		
 	}
 
 	function create(){  
 		
 		$create = new AdminManager();
 
-
 		if(isset($_POST['article_titre'], $_POST['article_contenu'])){
+
+			$_POST['article_titre'] = htmlspecialchars($_POST['article_titre']);
+		
+			$_POST['article_contenu'] = htmlspecialchars($_POST['article_contenu']);
 
 			if(!empty($_POST ['article_titre']) AND !empty($_POST['article_contenu'])){
 									
@@ -104,24 +114,29 @@ class AdminController{
 					/*Si une photo est envoyée au format png (3)*/
 					if(exif_imagetype($_FILES['miniature']['tmp_name']) == 3) {
 
-					$newcreate = $create -> displaycreate($_POST["article_titre"],$_POST["article_contenu"]);
-					
-					/*Chemin de la miniatures*/
-					$chemin = 'public/miniatures/'.$newcreate.'.png';
+						$newcreate = $create -> displaycreate($_POST["article_titre"],$_POST["article_contenu"]);
+						
+						/*Chemin de la miniatures*/
+						$chemin = 'public/miniatures/'.$newcreate.'.png';
 
-					move_uploaded_file($_FILES['miniature']['tmp_name'], $chemin);
+						move_uploaded_file($_FILES['miniature']['tmp_name'], $chemin);
 
-					$_SESSION['flash']['success'] = 'Votre article a bien été posté.';
+						$_SESSION['flash']['success'] = 'Votre article a bien été posté.';
 
-					header('Location: index.php?action=displayadmin');
+						header('Location: index.php?action=displayadmin');
 
 
 					}else {
-					$_SESSION['flash']['danger'] = 'Votre image doit être au format png.';
+						$_SESSION['flash']['danger'] = 'Votre image doit être au format png.';
+						header('Location: index.php?action=create');
+
                 	}
 				}	
-			}else{
+
+			 }else{
 				$_SESSION['flash']['danger'] = 'Veuillez remplir les champs';
+				header('Location: index.php?action=create');
+
 			}
 		}
 	}
@@ -140,6 +155,8 @@ class AdminController{
 		$create = new AdminManager();
 		
 		if(isset($_POST['article_titre'], $_POST['article_contenu'], $_GET["id"])){
+
+			$_POST['article_titre'] = htmlspecialchars($_POST['article_titre']);
 
 			if(!empty($_POST ['article_titre']) AND !empty($_POST['article_contenu'])){
 
@@ -186,6 +203,11 @@ class AdminController{
 
 
 		if(isset($_POST['commentaire_titre'], $_POST['commentaire_contenu'], $_GET["id"])){
+
+			$_POST['commentaire_titre'] = htmlspecialchars($_POST['commentaire_titre']);
+
+			$_POST['commentaire_contenu'] = htmlspecialchars($_POST['commentaire_contenu']);
+
 
 			if(!empty($_POST ['commentaire_titre']) AND !empty($_POST['commentaire_contenu'])){
 

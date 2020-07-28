@@ -16,7 +16,7 @@
          <div class="col-md-11">
             <div id="formcomments">
                <form action="index.php?action=ajoutcommentaire&id=<?php echo $_GET['id'] ?>" method="POST">
-                  <input type="text" name="pseudo" class="form-control" placeholder="Votre pseudo" required="" /><br />
+                  <input type="text" name="pseudo" class="form-control" placeholder="Votre pseudo" required="" ><br />
                   <textarea name="commentaire" class="form-control" placeholder="Votre commentaire..." required=""></textarea><br />
                   <input type="submit" class="btn btn-warning" value="Poster mon commentaire" name="submit_commentaire" />
                </form>

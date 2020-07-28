@@ -6,10 +6,10 @@
     <!-- Tabs Titles -->
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="http://myexe29.fr/wp-content/uploads/2020/07/jf-1.png" id="icon" alt="User Icon" />
+       <a href="index.php?action=accueil"><img src="http://myexe29.fr/wp-content/uploads/2020/07/jf-1.png" id="icon" alt="User Icon"/></a>
     </div>
     <br>
-    <form action="" method="POST">
+    <form action="index.php?action=login" method="POST">
       <input type="text" id="login" class="form-login" class="fadeIn second" name="username" placeholder="Pseudo">
       <br>
       <input type="password" id="password" class="form-login" class="fadeIn third" name="password" placeholder="Mot de passe">

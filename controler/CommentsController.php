@@ -6,11 +6,19 @@ class CommentsController{
 
 	function addcomments(){
 		$create = new CommentsManager();
+
+		$_POST['pseudo'] = htmlspecialchars($_POST['pseudo']);
+		
+		$_POST['commentaire']= htmlspecialchars($_POST['commentaire']);
+
 		$addCommentaires = $create -> displayaddComments($_POST["pseudo"],$_POST["commentaire"],$_GET["id"]);
+
 			if (isset($_POST['pseudo'],$_POST['commentaire'] )) {
 
 				$_SESSION['flash']['success'] = 'Votre commentaire a bien été ajouté';
+				
 			}
+
 		$homechapters = $create -> displayChap();
 		$chapters = $create -> displayArticles($_GET['id']);
 		$commentaires = $create -> displayComments($_GET['id']);

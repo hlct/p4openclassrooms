@@ -41,6 +41,8 @@ class CommentsManager extends Manager
 
         ));
 
+        return $req;
+    
     }
 
     public function displayFlag(){

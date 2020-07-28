@@ -27,11 +27,12 @@
 					}
 					if ($_GET['action'] == 'displayregister') {
 						$adminController -> register();	
-				
-					}  
+					}
 					if ($_GET['action'] == 'displaylogin') {
-						$adminController -> login();
 						require('views/FrontEnd/login.php'); 
+					}  
+					if ($_GET['action'] == 'login') {
+						$adminController -> login();
 					}
 					if ($_GET['action'] == 'displayadmin') {
 						if(!isset($_SESSION['auth'])){
@@ -39,7 +40,7 @@
 							header('Location: index.php?action=displaylogin');
 						}else{
 							$adminController -> admin();
-						}
+						}						
 					}
 					if ($_GET['action'] == 'logout') {
 						if(!isset($_SESSION['auth'])){
@@ -55,7 +56,6 @@
 							header('Location: index.php?action=displaylogin');
 						}else{
 							require('views/BackEnd/create_articles.php'); 
-
 						}
 					}
 					if ($_GET['action'] == 'createarticle') {
@@ -83,7 +83,6 @@
 							$adminController -> displayupdate();
 						}
 					}
-					
 					if ($_GET['action'] == 'suppr') {
 						if(!isset($_SESSION['auth'])){
 							$_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
